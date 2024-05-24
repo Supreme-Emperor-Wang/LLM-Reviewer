@@ -138,6 +138,7 @@ class GithubClient:
                     try:
                         line = max(1, int(comment["line"]))
                         start_line = max(1, int(comment["start_line"]))
+                        start_line = min(start_line, line)
 
                         # Create comment on certain PR line
                         pr.create_review_comment(
