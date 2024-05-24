@@ -154,10 +154,13 @@ class GithubClient:
                         ):
                             print(f"not using start_line because of issue: {e}")
                             pr.create_review_comment(
-                                body=comment["comment"],
+                                body="In this file: " + comment["comment"],
                                 commit=list(pr.get_commits())[-1],
                                 path=file.filename,
-                                line=line,
+                                # Just comment on the same line
+                                # sometimes GPT generates line no
+                                # outside the range of lines in the file
+                                line=1,
                             )
                             continue
 
